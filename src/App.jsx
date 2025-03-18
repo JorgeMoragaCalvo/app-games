@@ -1,10 +1,10 @@
-import "./App.css";
 import React, { useState, useEffect } from "react";
 import GameList from "./components/GameList";
-import GameFilters from "./components/GameFilters";
 import Pagination from "./components/Pagination";
+import GameFilters from "./components/GameFilters";
 import SearchBox from "./components/SearchBox";
 import { fetchGamesByMetacritic } from "./services/apiService";
+import "./App.css";
 
 function App() {
   const [games, setGames] = useState([]);
@@ -65,7 +65,7 @@ function App() {
   const getActiveFiltersDescription = () => {
     const activeFilters = [];
 
-    if (filters.search) activeFilters.push(`Search: ${filters.search}`);
+    if (filters.search) activeFilters.push(`Search: "${filters.search}"`);
     if (filters.year) activeFilters.push(`Year: ${filters.year}`);
     if (filters.genre) {
       const genreName = document.querySelector(
@@ -94,7 +94,8 @@ function App() {
   return (
     <div className="container">
       <header>
-        <h1>Top Video Games by Metacritic Rating</h1>
+        <h1>Top Video Games</h1>
+        <h3>by Metacritic Rating</h3>
       </header>
 
       <div className="search-and-filters">
@@ -103,6 +104,12 @@ function App() {
         <GameFilters
           onFilterChange={handleFilterChange}
           currentFilters={filters}
+        />
+
+        <Pagination
+          page={page}
+          onPrevious={handlePrevPage}
+          onNext={handleNextPage}
         />
       </div>
 

@@ -1,7 +1,12 @@
 const API_KEY = "5f4b1cb41e354a0fabafffd3358a049a";
 const BASE_URL = "https://api.rawg.io/api";
 
-export const fetchGamesByMetacritic = async (page = 1, filters = {}) => {
+export const fetchGamesByMetacritic = async (
+  page = 1,
+  filters = {}
+  //searchQuery = ""
+) => {
+  // Start with base parameters
   const params = new URLSearchParams({
     key: API_KEY,
     ordering: "-metacritic",
@@ -34,7 +39,7 @@ export const fetchGamesByMetacritic = async (page = 1, filters = {}) => {
   }
 
   if (filters.developer) {
-    params.append("developer", filters.developer);
+    params.append("developers", filters.developer);
   }
 
   const url = `${BASE_URL}/games?${params.toString()}`;
