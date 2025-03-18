@@ -36,4 +36,65 @@ export const fetchGamesByMetacritic = async (page = 1, filters = {}) => {
   if (filters.developer) {
     params.append("developer", filters.developer);
   }
+
+  const url = `${BASE_URL}/games?${params.toString()}`;
+  console.log("Fetching games with URL:", url);
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error("API Error Response:", errorText);
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+
+  return await response.json();
+};
+
+export const fetchGenres = async () => {
+  const params = new URLSearchParams({
+    key: API_KEY,
+  });
+
+  const url = `${BASE_URL}/genres?${params.toString()}`;
+  console.log("Fetching genres with URL:", url);
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error("API Error Response:", errorText);
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+
+  return await response.json();
+};
+
+export const fetchPlatforms = async () => {
+  const params = new URLSearchParams({
+    key: API_KEY,
+  });
+
+  const response = await fetch(`${BASE_URL}/platforms?${params}`);
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+
+  return await response.json();
+};
+
+export const fetchDevelopers = async () => {
+  const params = new URLSearchParams({
+    key: API_KEY,
+    page_size: 50,
+  });
+
+  const response = await fetch(`${BASE_URL}/developers?${params}`);
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+
+  return await response.json();
 };
