@@ -23,4 +23,17 @@ export const fetchGamesByMetacritic = async (page = 1, filters = {}) => {
     params.append("dates", `${startDate},${endDate}`);
     console.log(`Filtering by year: ${year} (${startDate} to ${endDate})`);
   }
+
+  if (filters.genre) {
+    params.append("genres", filters.genre);
+    console.log(`Filtering by genre ID: ${filters.genre}`);
+  }
+
+  if (filters.platform) {
+    params.append("platforms", filters.platform);
+  }
+
+  if (filters.developer) {
+    params.append("developer", filters.developer);
+  }
 };
