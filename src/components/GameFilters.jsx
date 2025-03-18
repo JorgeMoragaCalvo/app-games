@@ -15,6 +15,7 @@ const GameFilters = ({ onFilterChange, currentFilters }) => {
     developers: true,
   });
 
+  // Generate years from 1990 to current year
   const currentYear = new Date().getFullYear();
   const years = Array.from(
     { length: currentYear - 1990 + 1 },
@@ -24,17 +25,17 @@ const GameFilters = ({ onFilterChange, currentFilters }) => {
   useEffect(() => {
     const loadFilterData = async () => {
       try {
-        // loading genres
+        // Load genres
         const genresData = await fetchGenres();
         setGenres(genresData.results);
         setIsLoading((prev) => ({ ...prev, genres: false }));
 
-        // loading platforms
+        // Load platforms
         const platformsData = await fetchPlatforms();
         setPlatforms(platformsData.results);
         setIsLoading((prev) => ({ ...prev, platforms: false }));
 
-        // loading developers
+        // Load developers
         const developersData = await fetchDevelopers();
         setDevelopers(developersData.results);
         setIsLoading((prev) => ({ ...prev, developers: false }));
