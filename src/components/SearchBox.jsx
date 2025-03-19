@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 
 const SearchBox = ({ onSearch }) => {
+  // Estado para almacenar el término de búsqueda
   const [searchTerm, setSearchTerm] = useState("");
 
+  // Manejador para el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
     onSearch(searchTerm);
   };
 
+  // Manejador para el cambio en el input de búsqueda
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
+  // Manejador para limpiar el input de búsqueda
   const handleClear = () => {
     setSearchTerm("");
     onSearch("");
@@ -28,6 +32,7 @@ const SearchBox = ({ onSearch }) => {
             placeholder="Búsqueda..."
             className="search-input"
           />
+          {/* Se muestra el botón de limpiar si solo hay un término de búsqueda */}
           {searchTerm && (
             <button
               type="button"

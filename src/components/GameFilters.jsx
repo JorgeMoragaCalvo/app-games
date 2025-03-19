@@ -6,6 +6,7 @@ import {
 } from "../services/apiService";
 
 const GameFilters = ({ onFilterChange, currentFilters }) => {
+  // Estado para almacenar la lista de géneros, plataformas, desarrolladores y carga de datos
   const [genres, setGenres] = useState([]);
   const [platforms, setPlatforms] = useState([]);
   const [developers, setDevelopers] = useState([]);
@@ -15,27 +16,28 @@ const GameFilters = ({ onFilterChange, currentFilters }) => {
     developers: true,
   });
 
-  // Generate years from 1990 to current year
+  // Generate years from 1990 to current year. Array
   const currentYear = new Date().getFullYear();
   const years = Array.from(
     { length: currentYear - 1990 + 1 },
     (_, i) => currentYear - i
   );
 
+  // Cargar los datos de los filtros al montar el componente
   useEffect(() => {
     const loadFilterData = async () => {
       try {
-        // Load genres
+        // Loading genres
         const genresData = await fetchGenres();
         setGenres(genresData.results);
         setIsLoading((prev) => ({ ...prev, genres: false }));
 
-        // Load platforms
+        // Loading platforms
         const platformsData = await fetchPlatforms();
         setPlatforms(platformsData.results);
         setIsLoading((prev) => ({ ...prev, platforms: false }));
 
-        // Load developers
+        // Loading developers
         const developersData = await fetchDevelopers();
         setDevelopers(developersData.results);
         setIsLoading((prev) => ({ ...prev, developers: false }));
@@ -52,6 +54,7 @@ const GameFilters = ({ onFilterChange, currentFilters }) => {
     loadFilterData();
   }, []);
 
+  // Manejador para el cambio en el filtro de año
   const handleYearChange = (e) => {
     onFilterChange({
       ...currentFilters,
@@ -59,6 +62,7 @@ const GameFilters = ({ onFilterChange, currentFilters }) => {
     });
   };
 
+  // Manejador para el cambio en el filtro de género
   const handleGenreChange = (e) => {
     onFilterChange({
       ...currentFilters,
@@ -66,6 +70,7 @@ const GameFilters = ({ onFilterChange, currentFilters }) => {
     });
   };
 
+  // Manejador para el cambio en el filtro de plataforma
   const handlePlatformChange = (e) => {
     onFilterChange({
       ...currentFilters,
@@ -73,6 +78,7 @@ const GameFilters = ({ onFilterChange, currentFilters }) => {
     });
   };
 
+  // Manejador para el cambio en el filtro de desarrollador
   const handleDeveloperChange = (e) => {
     onFilterChange({
       ...currentFilters,
@@ -82,6 +88,7 @@ const GameFilters = ({ onFilterChange, currentFilters }) => {
 
   return (
     <div className="filters-container">
+      {/* Filtro de año */}
       <div className="filter-group">
         <label htmlFor="year-filter">Year:</label>
         <select
@@ -99,6 +106,7 @@ const GameFilters = ({ onFilterChange, currentFilters }) => {
         </select>
       </div>
 
+      {/* Filtro de género */}
       <div className="filter-group">
         <label htmlFor="genre-filter">Genre:</label>
         <select
@@ -117,6 +125,7 @@ const GameFilters = ({ onFilterChange, currentFilters }) => {
         </select>
       </div>
 
+      {/* Filtro de plataforma */}
       <div className="filter-group">
         <label htmlFor="platform-filter">Platform:</label>
         <select
@@ -135,6 +144,7 @@ const GameFilters = ({ onFilterChange, currentFilters }) => {
         </select>
       </div>
 
+      {/* Filtro de desarrollador */}
       <div className="filter-group">
         <label htmlFor="developer-filter">Developer:</label>
         <select

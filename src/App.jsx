@@ -7,6 +7,7 @@ import { fetchGamesByMetacritic } from "./services/apiService";
 import "./App.css";
 
 function App() {
+  // Estados para almacenar la lista de juegos, carga de datos, almacenar errores, página actual y filtros de búsqueda
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,12 +22,12 @@ function App() {
   useEffect(() => {
     const loadGames = async () => {
       try {
-        setLoading(true);
+        setLoading(true); // Indica que los datos se están cargando
         console.log("Loading games with filters:", filters);
-        const data = await fetchGamesByMetacritic(page, filters);
+        const data = await fetchGamesByMetacritic(page, filters); // Llama a la API para obtener los juegos
         console.log("Games data received:", data);
-        setGames(data.results || []);
-        setLoading(false);
+        setGames(data.results || []); // Actualiza el estado con los resultados de la API
+        setLoading(false); // Indica que la carga ha finalizado
       } catch (err) {
         console.error("Error loading games:", err);
         setError(err.message);
@@ -34,34 +35,40 @@ function App() {
       }
     };
 
+    // Se establece un timeout para evitar peticiones excesivas
     const timeoutId = setTimeout(() => {
       loadGames();
     }, 300);
 
     return () => clearTimeout(timeoutId);
-  }, [page, filters]);
+  }, [page, filters]); // Se ejecuta cuando cambia de `page` o `filters`
 
+  // Manejador para la página anterior
   const handlePrevPage = () => {
-    if (page > 1) setPage(page - 1);
+    if (page > 1) setPage(page - 1); // Si no es la primera página se disminuye
   };
 
+  // Manejador para la página siguiente
   const handleNextPage = () => {
     setPage(page + 1);
   };
 
+  // Manejador para el cambio en los filtros
   const handleFilterChange = (newFilters) => {
     console.log("Filters changed:", newFilters);
     // Reset to page 1 when filters change
     setPage(1);
-    setFilters({ ...filters, ...newFilters });
+    setFilters({ ...filters, ...newFilters }); // se actualiza los filtros
   };
 
+  // Manejador para la búsqueda
   const handleSearch = (searchTerm) => {
     // Reset to page 1 when search changes
     setPage(1);
     setFilters({ ...filters, search: searchTerm });
   };
 
+  // Función para obtener la descripción de los filtros activos
   const getActiveFiltersDescription = () => {
     const activeFilters = [];
 
