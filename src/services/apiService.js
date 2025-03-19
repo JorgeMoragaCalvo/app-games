@@ -22,7 +22,7 @@ export const fetchGamesByMetacritic = async (
   // Add filters if they exist
   if (filters.year) {
     const year = parseInt(filters.year);
-    // RAWG API requires dates in format YYYY-MM-DD
+    // RAWG API format YYYY-MM-DD
     const startDate = `${year}-01-01`;
     const endDate = `${year}-12-31`;
     params.append("dates", `${startDate},${endDate}`);

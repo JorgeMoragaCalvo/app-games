@@ -88,7 +88,7 @@ function App() {
 
     return activeFilters.length > 0
       ? activeFilters.join(" • ")
-      : "No filters applied";
+      : "No se aplicaron filtros";
   };
 
   return (
@@ -135,7 +135,7 @@ function App() {
           ) : (
             <>
               <div className="results-info">
-                <p>Showing {games.length} games</p>
+                <p>Mostrando {games.length} games</p>
               </div>
               <GameList games={games} />
             </>
