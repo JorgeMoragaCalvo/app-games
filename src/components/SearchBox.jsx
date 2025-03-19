@@ -25,7 +25,7 @@ const SearchBox = ({ onSearch }) => {
             type="text"
             value={searchTerm}
             onChange={handleChange}
-            placeholder="Search games..."
+            placeholder="Búsqueda..."
             className="search-input"
           />
           {searchTerm && (
