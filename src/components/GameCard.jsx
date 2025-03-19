@@ -1,5 +1,6 @@
 import React from "react";
-
+// This component takes a game object as prop and displays key information from game: image, metacritic ranking, release, genres.
+// N/A -> metacritic ranking not available
 const GameCard = ({ game }) => {
   return (
     <div className="game-card">

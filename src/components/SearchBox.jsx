@@ -40,7 +40,7 @@ const SearchBox = ({ onSearch }) => {
           )}
         </div>
         <button type="submit" className="search-btn">
-          Search
+          Búsqueda
         </button>
       </form>
     </div>
